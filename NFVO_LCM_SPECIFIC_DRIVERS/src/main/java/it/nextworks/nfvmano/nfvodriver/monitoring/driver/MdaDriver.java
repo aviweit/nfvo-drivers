@@ -50,8 +50,11 @@ public class MdaDriver implements MonitoringDriverProviderInterface {
 
         String nsInstanceId = request.getPerformanceMetricGroup().get(1);
         String productId = null;
-        if(request.getPerformanceMetricGroup().size()>=3){
+        String transactionId = null;
+        // assuming productId and transactionId are always set in this order
+        if(request.getPerformanceMetricGroup().size()>=4){
             productId = request.getPerformanceMetricGroup().get(2);
+            transactionId = request.getPerformanceMetricGroup().get(3);
         }
 
 
@@ -66,9 +69,12 @@ public class MdaDriver implements MonitoringDriverProviderInterface {
         //
         log.debug("PM job parameters - Metric type: " + metricType + " - Monitoring object type: " + mot + " - VNF ID: " + vnfInstanceId + " - VNFD ID: " + vnfdId + " - NS Instance ID: " + nsInstanceId);
         ConfigModel body = new ConfigModel();
-        body.setTopic(domain);
-        body.setBusinessID(Integer.parseInt(productId));
-        body.setNetworkID(0);
+        body.setTenantID(domain);
+        body.setTopic(domain + "-in-0");
+        body.setBusinessID(transactionId);
+        body.setReferenceID(productId);
+        body.setResourceID(productId);
+        body.setNetworkID(123);
         List<MetricModel> metrics = new ArrayList<>();
         MetricModel metricModel = new MetricModel();
         //metricModel.setMetricType(mot.toString());
@@ -79,8 +85,8 @@ public class MdaDriver implements MonitoringDriverProviderInterface {
         if(params.containsKey("aggregationMethod")){
             metricModel.setAggregationMethod(params.get("aggregationMethod"));
         }
-        if(params.containsKey("timestampStep")){
-            metricModel.setTimestampStep(params.get("timestampStep"));
+        if(params.containsKey("step")){
+            metricModel.setTimestampStep(params.get("step"));
         }
 
         metrics.add(metricModel);

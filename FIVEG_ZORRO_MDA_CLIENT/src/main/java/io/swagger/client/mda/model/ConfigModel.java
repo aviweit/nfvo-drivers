@@ -26,7 +26,10 @@ import java.util.List;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2021-03-14T17:12:29.690+01:00[Europe/Rome]")
 public class ConfigModel {
   @SerializedName("businessID")
-  private Integer businessID = null;
+  private String businessID = null;
+
+  @SerializedName("tenantID")
+  private String tenantID = null;
 
   @SerializedName("topic")
   private String topic = null;
@@ -34,16 +37,76 @@ public class ConfigModel {
   @SerializedName("networkID")
   private Integer networkID = null;
 
+  @SerializedName("resourceID")
+  private String resourceID = null;
+
+  @SerializedName("referenceID")
+  private String referenceID = null;
+
   @SerializedName("metrics")
   private List<MetricModel> metrics = new ArrayList<MetricModel>();
 
   @SerializedName("timestampStart")
-  private String timestampStart = "2021-03-12T14:04:47.918735";
+  private String timestampStart = null;
 
   @SerializedName("timestampEnd")
   private String timestampEnd = null;
 
-  public ConfigModel businessID(Integer businessID) {
+  public ConfigModel resourceID(String resourceID) {
+	this.resourceID = resourceID;
+	return this;
+	}
+
+	/**
+	* Get resourceID
+	* @return resourceID
+	**/
+  @Schema(required = true, description = "")
+	  public String getResourceID() {
+	    return resourceID;
+	  }
+
+  public void setResourceID(String resourceID) {
+    this.resourceID = resourceID;
+  }
+
+  public ConfigModel referenceID(String referenceID) {
+    this.referenceID = referenceID;
+    return this;
+  }
+
+   /**
+   * Get referenceID
+   * @return referenceID
+  **/
+  @Schema(required = true, description = "")
+  public String getReferenceID() {
+    return referenceID;
+  }
+
+  public void setReferenceID(String referenceID) {
+    this.referenceID = referenceID;
+  }
+
+  public ConfigModel tenantID(String tenantID) {
+    this.tenantID = tenantID;
+    return this;
+  }
+
+   /**
+   * Get tenantID
+   * @return tenantID
+  **/
+  @Schema(required = true, description = "")
+  public String getTenantID() {
+    return tenantID;
+  }
+
+  public void setTenantID(String tenantID) {
+    this.tenantID = tenantID;
+  }
+
+  public ConfigModel businessID(String businessID) {
     this.businessID = businessID;
     return this;
   }
@@ -53,11 +116,11 @@ public class ConfigModel {
    * @return businessID
   **/
   @Schema(required = true, description = "")
-  public Integer getBusinessID() {
+  public String getBusinessID() {
     return businessID;
   }
 
-  public void setBusinessID(Integer businessID) {
+  public void setBusinessID(String businessID) {
     this.businessID = businessID;
   }
 
